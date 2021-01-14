@@ -6,7 +6,7 @@ export default function Nav() {
     <nav>
       <ul>
         <li>
-          <Link to="/">Hot Now</Link>
+          <Link to="/">Hot Now!</Link>
         </li>
         <li>
           <Link to="/pizzas">Pizza Menu</Link>
