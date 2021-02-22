@@ -40,5 +40,33 @@ export default {
       validation: (Rule) => Rule.min(1000).max(50000),
       // TODO: Add custom component
     },
+    {
+      name: 'toppings',
+      title: 'Toppings',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'topping' }] }],
+    },
   ],
+  preview: {
+    select: {
+      title: 'name',
+      media: 'image',
+      topping0: 'toppings.0.name',
+      topping1: 'toppings.1.name',
+      topping2: 'toppings.2.name',
+      topping3: 'toppings.3.name',
+    },
+    prepare: ({ title, media, ...toppings }) => {
+      // anything not mentioned, stick it in an object named toppings
+
+      // Filter undefined toppings out
+      const filteredToppings = Object.values(toppings).filter(Boolean);
+      // Return the preview object
+      return {
+        title,
+        media,
+        subtitle: Object.values(filteredToppings).join(', '),
+      };
+    },
+  },
 };
